@@ -1,0 +1,27 @@
+{
+  "name": "notify-line-bot-mpu6050-esp32",
+  "version": "1.0.0",
+  "description": "for learn esp32",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeronos/Notify-Line-BOT-MPU6050-ESP32.git"
+  },
+  "author": "panuwit.s",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeronos/Notify-Line-BOT-MPU6050-ESP32/issues"
+  },
+  "homepage": "https://github.com/zeronos/Notify-Line-BOT-MPU6050-ESP32#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "ngrok": "^4.3.3",
+    "request": "^2.88.2"
+  }
+}
