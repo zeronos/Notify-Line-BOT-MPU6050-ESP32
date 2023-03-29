@@ -18,10 +18,12 @@
   },
   "homepage": "https://github.com/zeronos/Notify-Line-BOT-MPU6050-ESP32#readme",
   "dependencies": {
+    "@line/bot-sdk": "^7.5.2",
     "body-parser": "^1.20.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "ngrok": "^4.3.3",
-    "request": "^2.88.2"
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
   }
 }
