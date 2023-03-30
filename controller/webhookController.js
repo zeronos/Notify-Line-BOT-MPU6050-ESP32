@@ -1,19 +1,17 @@
 const webhookFuction = require('../function/webhookFunction.js')
-const {infomation,reply} = webhookFuction
+const {infomation,eventHandler} = webhookFuction
 
 const webhook  = function(req,res){
-    console.log(req.body);
-    //let text = req.body.events[0].message.text.toLowerCase()
-    //let sender = req.body.events[0].source.userId
-    //let replyToken = req.body.events[0].replyToken
+    let text = req.body.events[0].message.text.toLowerCase()
+    let sender = req.body.events[0].source.userId
+    let reply_token = req.body.events[0].replyToken
     
-    //reply(replyToken)
-    /*if (text === 'test1') {
-        infomation(sender, text)
-        res.sendStatus(200)
-    }*/
-
-    res.sendStatus(200)
+    if (text === 'รายงาน') {
+        infomation(sender,reply_token)
+    }
+    else{
+        eventHandler(text,sender,reply_token);
+    }
 }
 
 module.exports ={
