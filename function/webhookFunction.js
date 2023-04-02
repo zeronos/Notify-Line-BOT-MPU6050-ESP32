@@ -58,19 +58,8 @@ function sendText(text,sender,reply_token){
 }
 
 function publishMQTT(text){
-  console.log('MQTT');
   let client = mqtt.connect(mqtt_options);
   client.on('connect', function() { // When connected
-      console.log('MQTT connected');
-      // subscribe to a topic
-      client.subscribe(process.env.MQTT_TOPIC, function() {
-          // when a message arrives, do something with it
-          client.on('message', function(topic, message, packet) {
-              console.log("Received '" + message + "' on '" + topic + "'");
-          });
-      });
-      
-
       // publish a message to a topic
       client.publish(process.env.MQTT_TOPIC, text, function() {
           console.log("Message is published");
@@ -80,16 +69,34 @@ function publishMQTT(text){
 }
 
 function requestLineAPI(data){
-  request({
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer '+process.env.CH_ACCESS_TOKEN
-    },
-    url: 'https://api.line.me/v2/bot/message/reply',
-    method: 'POST',
-    body: data,
-    json: true
-  })
+
+  if(!data.hasOwnProperty('to')){
+    data.to = process.env.LINE_USERID
+    request({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+process.env.CH_ACCESS_TOKEN
+      },
+      url: 'https://api.line.me/v2/bot/message/push',
+      method: 'POST',
+      body: data,
+      json: true
+    })
+  }
+  else{
+    request({
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+process.env.CH_ACCESS_TOKEN
+      },
+      url: 'https://api.line.me/v2/bot/message/reply',
+      method: 'POST',
+      body: data,
+      json: true
+    })
+  }
+
+  
 }
 
 function convertText2Publish(text){
@@ -107,5 +114,6 @@ function convertText2Publish(text){
 
 module.exports = {
     infomation,
-    eventHandler
+    eventHandler,
+    requestLineAPI
 }
