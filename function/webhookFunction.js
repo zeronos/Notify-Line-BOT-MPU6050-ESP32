@@ -14,6 +14,26 @@ function eventHandler (text,sender,reply_token){
     }
 }
 
+const reciveFallsData = function(req,res){
+
+  let client = mqtt.connect(mqtt_options);
+  client.on('connect', function() { // When connected
+     client.subscribe(process.env.MQTT_SUBSCRIBE_TOPIC,function(){
+      client.on('message', function(topic, message) {
+        let data = {
+          messages: [
+            {
+              type: 'text',
+              text: '!!ตรวจพบการหกล้ม!! โปรดโทรแจ้งรถเจ้าหน้าที่พยาบาล หรือตรวจสอบและปฐมพยาลให้แก่ผู้บาดเจ็บ'
+            }
+          ]
+        }
+        requestLineAPI(data);
+      });
+    });
+  });
+}
+
 function infomation (sender,reply_token){
     let data = {
         to: sender,
@@ -115,5 +135,5 @@ function convertText2Publish(text){
 module.exports = {
     infomation,
     eventHandler,
-    requestLineAPI
+    reciveFallsData
 }

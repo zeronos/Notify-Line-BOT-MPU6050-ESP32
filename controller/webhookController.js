@@ -1,5 +1,5 @@
-const webhookFuction = require('../function/webhookFunction.js')
-const {infomation,eventHandler,requestLineAPI} = webhookFuction
+const webhookFunction = require('../function/webhookFunction.js')
+const {infomation,eventHandler} = webhookFunction
 const IP = require('ip');
 
 const webhook  = function(req,res){
@@ -16,22 +16,6 @@ const webhook  = function(req,res){
     res.sendStatus(200)
 }
 
-const reciveFallsData = function(req,res){
-    let data = {
-        messages: [
-          {
-            type: 'text',
-            text: '!!ตรวจพบการหกล้ม!! โปรดโทรแจ้งรถเจ้าหน้าที่พยาบาล หรือตรวจสอบและปฐมพยาลให้แก่ผู้บาดเจ็บ'
-          }
-        ]
-    }
-    requestLineAPI(data);
-    const ipAddresses = req.header('x-forwarded-for');
-    res.send(ipAddresses);
-
-}
-
 module.exports ={
-    webhook,
-    reciveFallsData
+    webhook
 }
