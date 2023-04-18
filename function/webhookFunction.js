@@ -91,13 +91,13 @@ function publishMQTT(text){
 function requestLineAPI(data){
 
   if(!data.hasOwnProperty('to')){
-    data.to = process.env.LINE_USERID
+    data.to = process.env.LINE_USERID.split(',')
     request({
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer '+process.env.CH_ACCESS_TOKEN
       },
-      url: 'https://api.line.me/v2/bot/message/push',
+      url: 'https://api.line.me/v2/bot/message/multicast',
       method: 'POST',
       body: data,
       json: true
