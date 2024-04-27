@@ -132,7 +132,7 @@ void reconnect() {
 
 void callback(char* topic, byte* payload, unsigned int length) {
   String          incommingMessage = "";
-  const String    domainHosting = "";
+  const String    domainHosting = "https://github.com/zeronos/Notify-Line-BOT-MPU6050-ESP32/raw/main/audio/";
   String          format_txt = "";
   const char*     audioPlay;
   for (int i = 0; i < length; i++) 
